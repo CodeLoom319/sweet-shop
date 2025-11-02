@@ -15,21 +15,28 @@ export const getAllSweets = async (req, res) => {
 };
 
 export const searchSweets = async (req, res) => {
-  const { name, category, minPrice, maxPrice } = req.query;
+  try {
+    const { name, category, minPrice, maxPrice } = req.query;
 
-  const sweets = await prisma.sweet.findMany({
-    where: {
-      AND: [
-        name ? { name: { contains: name, mode: "insensitive" } } : {},
-        category ? { category } : {},
-        minPrice ? { price: { gte: parseFloat(minPrice) } } : {},
-        maxPrice ? { price: { lte: parseFloat(maxPrice) } } : {},
-      ],
-    },
-  });
+    const sweets = await prisma.sweet.findMany({
+      where: {
+        AND: [
+          name ? { name: { contains: name } } : {},
+          category ? { category } : {},
+          minPrice ? { price: { gte: parseFloat(minPrice) } } : {},
+          maxPrice ? { price: { lte: parseFloat(maxPrice) } } : {},
+        ],
+      },
+    });
 
-  res.json(sweets);
+    return res.json(sweets);
+  } catch (err) {
+    console.error("SEARCH ERROR:", err);
+    return res.status(500).json({ error: err.message });
+  }
 };
+
+
 
 export const updateSweet = async (req, res) => {
   const { id } = req.params;

@@ -21,8 +21,10 @@ router.delete("/:id", verifyToken, isAdmin, deleteSweet);
 router.post("/:id/restock", verifyToken, isAdmin, restockSweet);
 
 // Public + User routes
-router.get("/", getAllSweets);
-router.get("/search", searchSweets);
+// Public + User routes
+router.get("/search", searchSweets);  // FIRST
+router.get("/", getAllSweets);       // THEN this
 router.post("/:id/purchase", verifyToken, purchaseSweet);
+
 
 export default router;
