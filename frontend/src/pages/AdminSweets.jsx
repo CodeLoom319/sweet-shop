@@ -19,11 +19,11 @@ const AdminSweets = () => {
   });
   const [editId, setEditId] = useState(null);
 
-  // ✅ Block page if NOT admin
+  // Block page if NOT admin
   if (role !== "ADMIN") {
     return (
       <h2 style={{ textAlign: "center", marginTop: "50px", color: "red" }}>
-        ❌ Access Denied — Admin Only
+        Access Denied - Admin Only
       </h2>
     );
   }
@@ -50,50 +50,62 @@ const AdminSweets = () => {
       return alert("All fields required!");
     }
 
+    const data = {
+      name: form.name,
+      category: form.category,
+      price: form.price,
+      stock: form.quantity   
+    };
+
     try {
       if (editId) {
-        await updateSweet(editId, form);
-        alert("✅ Sweet updated!");
+        await updateSweet(editId, data);
+        alert("Sweet updated!");
       } else {
-        await addSweet(form);
-        alert("✅ Sweet added!");
+        await addSweet(data);
+        alert("Sweet added!");
       }
+
       setForm({ name: "", category: "", price: "", quantity: "" });
       setEditId(null);
       fetchSweets();
     } catch (err) {
       console.error(err);
-      alert("❌ Failed to save sweet");
+      alert("Failed to save sweet");
     }
   };
 
   const handleEdit = (sweet) => {
-    setEditId(sweet.id);
+    const id = sweet._id || sweet.id; 
+    setEditId(id);
+
     setForm({
       name: sweet.name,
       category: sweet.category,
       price: sweet.price,
-      quantity: sweet.quantity,
+      quantity: sweet.stock || sweet.quantity  
     });
   };
 
   const handleDelete = async (id) => {
+    id = id._id || id;
     if (window.confirm("Delete sweet?")) {
       await deleteSweet(id);
-      alert("🗑️ Deleted!");
+      alert("Deleted!");
       fetchSweets();
     }
   };
 
   const handleRestock = async (id) => {
+    id = id._id || id;
     await restockSweet(id, 1);
-    alert("📦 Restocked!");
+    alert("Restocked!");
     fetchSweets();
   };
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>🍭 Admin Sweet Management</h2>
+      <h2>Admin Sweet Management</h2>
       <p>Welcome, <strong>{email}</strong> (Admin)</p>
 
       <div style={{ marginBottom: "20px" }}>
@@ -118,19 +130,22 @@ const AdminSweets = () => {
           </tr>
         </thead>
         <tbody>
-          {sweets.map((sweet) => (
-            <tr key={sweet.id}>
-              <td>{sweet.name}</td>
-              <td>{sweet.category}</td>
-              <td>₹{sweet.price}</td>
-              <td>{sweet.quantity}</td>
-              <td>
-                <button onClick={() => handleEdit(sweet)}>Edit</button>
-                <button onClick={() => handleDelete(sweet.id)}>Delete</button>
-                <button onClick={() => handleRestock(sweet.id)}>+1</button>
-              </td>
-            </tr>
-          ))}
+          {sweets.map((sweet) => {
+            const id = sweet._id || sweet.id;
+            return (
+              <tr key={id}>
+                <td>{sweet.name}</td>
+                <td>{sweet.category}</td>
+                <td>₹{sweet.price}</td>
+                <td>{sweet.stock || sweet.quantity}</td>
+                <td>
+                  <button onClick={() => handleEdit(sweet)}>Edit</button>
+                  <button onClick={() => handleDelete(id)}>Delete</button>
+                  <button onClick={() => handleRestock(id)}>+1</button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

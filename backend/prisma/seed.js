@@ -12,18 +12,17 @@ async function main() {
     ],
   });
 
-  console.log("✅ Sweets Inserted!");
+  await prisma.user.create({
+    data: {
+      name: "Admin",
+      email: "admin@example.com",
+      password: "$2b$10$V7i7L/ljB7UpC9E8yM8HjOKD2kz2/kMkuqFvACCOJ0S9XWuW0An4m", // Admin@123
+      role: "ADMIN"
+    }
+  });
+
+  console.log(" Sweets & Admin Created!");
 }
-
-await prisma.user.create({
-  data: {
-    email: "admin@example.com",
-    password: "$2b$10$V7i7L/ljB7UpC9E8yM8HjOKD2kz2/kMkuqFvACCOJ0S9XWuW0An4m", // hashed "Admin@123"
-    role: "ADMIN"
-  }
-});
-console.log("✅ Admin Created!");
-
 
 main()
   .catch((e) => console.error(e))

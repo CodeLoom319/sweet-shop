@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
 
-  // ✅ Load from localStorage on refresh
+  //  Load from localStorage on refresh
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
     const savedRole = localStorage.getItem("role");

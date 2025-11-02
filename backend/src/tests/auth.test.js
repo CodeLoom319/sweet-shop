@@ -70,7 +70,6 @@ describe("Auth API", () => {
         quantity: 1,
       });
 
-    // without Authorization header it should reject (401)
     expect(res.statusCode).toBe(401);
     expect(res.body).toHaveProperty("message", "No token provided");
   });

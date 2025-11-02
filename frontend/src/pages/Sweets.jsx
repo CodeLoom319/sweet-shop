@@ -34,7 +34,7 @@ export default function Sweets() {
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.title}>🍬 Sweet Store</h2>
+      <h2 style={styles.title}> Sweet Store</h2>
 
       <div style={styles.grid}>
         {sweets.map((s) => (

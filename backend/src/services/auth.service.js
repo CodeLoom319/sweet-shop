@@ -15,7 +15,7 @@ export const createUser = async ({ name, email, password }) => {
       name, 
       email, 
       password: hashedPassword,
-      role: "USER" // ✅ default role
+      role: "USER" 
     },
   });
 };

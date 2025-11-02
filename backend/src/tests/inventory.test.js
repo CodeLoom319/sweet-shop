@@ -72,11 +72,11 @@ describe("Inventory Management (Purchase & Restock)", () => {
       .set("Authorization", `Bearer ${userToken}`);
 
     expect(res.statusCode).toBe(200);
-    expect(res.body.quantity).toBe(4); // 5 - 1
+    expect(res.body.quantity).toBe(4); 
   });
 
   test("Purchase fails if sweet is out of stock", async () => {
-    // reduce stock to 0 manually
+   
     await prisma.sweet.update({
       where: { id: sweetId },
       data: { quantity: 0 }
@@ -97,7 +97,7 @@ describe("Inventory Management (Purchase & Restock)", () => {
       .send({ amount: 10 });
 
     expect(res.statusCode).toBe(200);
-    expect(res.body.quantity).toBe(10); // Restocked to 10
+    expect(res.body.quantity).toBe(10); 
   });
 
 });

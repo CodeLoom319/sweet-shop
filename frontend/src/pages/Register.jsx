@@ -8,11 +8,11 @@ export default function Register() {
     e.preventDefault();
     try {
       await API.post("/auth/register", form);
-      alert("Register Success ✅");
+      alert("Register Success ");
       window.location.href = "/login";
     } catch (err) {
       console.log(err.response?.data);
-      alert(err.response?.data?.error || "Registration Failed ❌");
+      alert(err.response?.data?.error || "Registration Failed ");
     }
   };
 

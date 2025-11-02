@@ -2,12 +2,12 @@
 import { useState, useContext } from "react";
 import API from "../services/api";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom"; // ✅
+import { useNavigate } from "react-router-dom"; 
 
 export default function Login() {
   const { login } = useContext(AuthContext);
   const [form, setForm] = useState({ email: "", password: "" });
-  const navigate = useNavigate(); // ✅
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,14 +15,14 @@ export default function Login() {
     try {
       const res = await API.post("/auth/login", form);
 
-      // ✅ Save to context + localStorage
+      //  Save to context + localStorage
       login({
         token: res.data.token,
         role: res.data.role,
         email: form.email,
       });
 
-      // ✅ Correct redirect without losing context
+      //  Correct redirect without losing context
       if (res.data.role === "ADMIN") {
         navigate("/admin");
       } else {
