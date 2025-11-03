@@ -101,8 +101,8 @@ npm run test
 
 ## Screenshots
 
-```
-![Home Page](screenshots/HomePage.jpeg)
+
+![Home Page](screenshots/HomePage.JPG)
 ![Register Page](screenshots/RegisterSuccess.JPG)
 ![Login Page](screenshots/InvalidLogin.JPG)
 ![User Sweet Page](screenshots/UserSweetPage1.JPG)
@@ -111,7 +111,7 @@ npm run test
 ![Restocked Sweet](screenshots/Restocked.JPG)
 
 
-```
+
 
 ---
 
