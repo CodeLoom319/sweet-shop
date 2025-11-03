@@ -102,7 +102,7 @@ npm run test
 ## Screenshots
 
 ```
-![Home Page](screenshots/HomePage.JPG)
+![Home Page](screenshots/HomePage.jpeg)
 ![Register Page](screenshots/RegisterSuccess.JPG)
 ![Login Page](screenshots/InvalidLogin.JPG)
 ![User Sweet Page](screenshots/UserSweetPage1.JPG)
